@@ -37,7 +37,7 @@ void counting_rsort(int *array, size_t size, int sd, int *buffer)
 		cnt[(array[n] / sd) % 10] += 1;
 
 	for (n = 0; n < 10; n++)
-		cnt[i] += cnt[i - 1];
+		cnt[n] += cnt[n - 1];
 
 	for (n = size - 1; (int)n >= 0; n--)
 	{
@@ -65,14 +65,14 @@ void radix_sort(int *array, size_t size)
 		return;
 
 	bffr = malloc(sizeof(int) * size);
-	if (buffr == NULL)
+	if (bffr == NULL)
 		return;
 
 	max = max_int(array, size);
 	for (sd = 1; max / sd > 0; sd *= 10)
 	{
-		counting_rsort(array, size, sd, buffr);
+		counting_rsort(array, size, sd, bffr);
 		print_array(array, size);
 	}
-	free(buffr);
+	free(bffr);
 }
